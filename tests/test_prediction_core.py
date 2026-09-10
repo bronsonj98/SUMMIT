@@ -12,6 +12,12 @@ from summit.prediction.operator import GenotypeOperator
 from summit.prediction.solver import solve, ConvergenceError
 
 
+def native_threads():
+    # Other native tests may already have fixed the process-wide thread count.
+    from summit.prediction.genotype import native_module
+    return int(native_module().configured_blas_threads()) or 1
+
+
 def fixture(seed=911, n=61, m=43):
     rng = np.random.default_rng(seed)
     calls = rng.binomial(2, .35, size=(n, m)).astype(float)
@@ -56,7 +62,8 @@ def dense(source, trait, covariance, residual):
 @pytest.mark.parametrize("backend", ["numpy", "native"])
 def test_masked_joint_solve_dense_gls_and_passes(storage, backend):
     source, traits = fixture()
-    plan = plan_prediction(traits, source, storage=storage, block_size=7, rhs_columns=6)
+    plan = plan_prediction(traits, source, storage=storage, block_size=7, rhs_columns=6,
+        threads=native_threads() if backend == "native" else 1)
     operator = GenotypeOperator(source, traits, plan, backend=backend)
     operator.setup()
     result = solve(operator, SolverSpec(rtol=1e-10, max_iterations=160))
