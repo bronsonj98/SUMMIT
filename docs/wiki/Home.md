@@ -16,7 +16,7 @@ Each analysis guide explains what to supply, how to run it, and how to read the 
 
 [Benchmarks](Benchmarks.md) describes measured performance and reproduction
 commands. [Troubleshooting](Troubleshooting.md) covers input, build, and fitting
-errors. [Development](Development.md) describes the source layout and tests.
+errors.
 
 The main `summit` command supports LD scores, h²/rg, and one-environment G×E.
 Joint generalized G×E estimation is available through Python, with a separate

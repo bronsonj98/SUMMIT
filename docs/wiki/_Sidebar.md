@@ -13,4 +13,3 @@
 - [Methods](Methods.md)
 - [Benchmarks](Benchmarks.md)
 - [Troubleshooting](Troubleshooting.md)
-- [Development](Development.md)
