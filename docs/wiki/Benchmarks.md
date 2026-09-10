@@ -2,6 +2,7 @@
 
 The measurements below describe specific tested workloads. Runtime depends on
 panel size, annotations, context dimension, storage, and CPU configuration.
+For estimated genetic variance in UK Biobank, see [Real-data results](Real-data-results.md).
 
 ## PGS synthetic benchmark
 
